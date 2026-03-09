@@ -1,5 +1,8 @@
 package main5;
-public class Chambre implements Comparable<Chambre> {
+
+import java.io.Serializable;
+
+public class Chambre implements Serializable {
 	private int capacite;
 	private String etat;
 	private int prix;

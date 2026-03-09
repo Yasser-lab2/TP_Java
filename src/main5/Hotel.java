@@ -26,61 +26,53 @@ public class Hotel {
 	public static void main(String[] args) {
 //		Chambre C1 = saisie();
 
-		Hotel h = new Hotel();
-
-		h.listChambreSaisie();
-
-		h.afficher();
-
-		h.trier();
-
-		h.afficher();
 
 //		System.out.println(C1.toString());
 
 	}
 
-	public void trier() {
-
-		Collections.sort(chbrs);
-
-	}
-
-	public void listChambreSaisie() {
-		int count = Integer.parseInt(new Scanner(System.in).nextLine());
-		for (int i = 0; i < count; i++) {
-			Chambre c = saisie();
-
-			chbrs.add(c);
-
+	
+	public Chambre[] saisirTableau(int n) {
+		Chambre[] hotel = new Chambre[n];
+		for(int i=0;i<n;i++) {
+			hotel[i]=saisie();
 		}
+		return hotel;
 	}
-
-	public void afficherCat(int catergorie) {
-		for (Iterator iterator = chbrs.iterator(); iterator.hasNext();) {
-			Chambre c = (Chambre) iterator.next();
-			if (c.getCategorie() == catergorie) {
-
+	
+	public void affichercat(Chambre [] t, int cat) {
+		for(Chambre c : t) { 
+			if(c.getCategorie()==cat) {
 				System.out.println(c);
-
 			}
 		}
 	}
+	
+	public void trierParCapacite(Chambre[] t) {
+        for (int i = 0; i < t.length - 1; i++) {
+            for (int j = 0; j < t.length - i - 1; j++) {
+                if (t[j].getCapacite() > t[j+1].getCapacite()) {
+                    Chambre temp = t[j];
+                    t[j] = t[j+1];
+                    t[j+1] = temp;
+                }
+            }
+        }
+    }
+	
 
-	public void afficher() {
-		for (Iterator iterator = chbrs.iterator(); iterator.hasNext();) {
-			Chambre c = (Chambre) iterator.next();
-
-			System.out.println(c);
-
+	public void afficher(Chambre [] t) {
+		for(Chambre c : t) { 
+				System.out.println(c);
 		}
 	}
 
 	public Chambre saisie() {
+		
 		Scanner s = new Scanner(System.in);
 		System.out.println("enter catergorie  : ");
 		String categorie = s.nextLine();
-
+		
 		System.out.println("enter prix : ");
 		String prix = s.nextLine();
 
@@ -92,53 +84,9 @@ public class Hotel {
 
 		Chambre C1 = new Chambre(Integer.parseInt(numero), Integer.parseInt(prix), Integer.parseInt(categorie), "L",
 				Integer.parseInt(capacite));
+		
 		return C1;
 	}
 
-	public void serialize() {
-
-	
-		
-		try {
-			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("chambre.dat"));
-			try {
-				// On écrit objet, puis on vide le buffer
-				oos.writeObject(chbrs);
-				oos.flush();
-
-			}
-			finally {
-				oos.close();
-			}
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-
-//	public Vector<Chambre> deserialize() {
-//		
-//		
-//		
-//		try {
-//
-//			ObjectInputStream ois = new ObjectInputStream(new FileInputStream("chambre.dat"));
-//			try {
-//				// On cast l'entrée
-//				main5.Chambre derserializedchambrese = (Chambre) ois.readObject();
-//				// Puis on affiche
-//				System.out.println(newch.toString());
-//				return derserializedchambrese;
-//			} finally {
-//				ois.close();
-//			}
-//		} catch (Exception e) {
-//			System.out.println(e);
-//		}
-//
-//	}
-//
 }
+
