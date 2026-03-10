@@ -1,18 +1,16 @@
 package main5;
 
-import java.io.Serializable;
-
-public class Chambre implements Serializable {
+public class Chambre {
 	private int capacite;
-	private String etat;
-	private int prix;
+	private char etat;
+	private double prix;
 	private int categorie;
 	private int numero;
 
 	public Chambre(int numero,
-			int prix,
+			double prix,
 			int categorie,
-			String etat,
+			char etat,
 			int capacite
 			) {
 		// TODO Auto-generated constructor stub
@@ -24,13 +22,6 @@ public class Chambre implements Serializable {
 		
 	}
     
-	public int compareTo(Chambre c)
-	{
-	
-		return Integer.compare(capacite,c.getCapacite());
-		
-	}
-
 	public String toString() {
 		return"Chamber "+numero+":"+" categorie :"+ categorie+" capacite : "+capacite+" etat : "+etat+" prix : "+prix+"$ \n";
 	}
@@ -46,22 +37,22 @@ public class Chambre implements Serializable {
 	}
 
 
-	public String getEtat() {
+	public char getEtat() {
 		return etat;
 	}
 
 
-	public void setEtat(String etat) {
+	public void setEtat(char etat) {
 		this.etat = etat;
 	}
 
 
-	public int getPrix() {
+	public double getPrix() {
 		return prix;
 	}
 
 
-	public void setPrix(int prix) {
+	public void setPrix(double prix) {
 		this.prix = prix;
 	}
 

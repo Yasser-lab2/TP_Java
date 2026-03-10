@@ -45,7 +45,9 @@ public class Test {
 			// On fait l'opération inverse (lecture)
 			ObjectInputStream ois = new ObjectInputStream(new FileInputStream("fichierObjet"));
 			try {
-				// On cast l'entrée				// Puis on affiche
+				// On cast l'entrée
+				newbible = (Bibliothèque) ois.readObject();
+				// Puis on affiche
 				System.out.println(newbible.toString());
 			} finally {
 				ois.close();
