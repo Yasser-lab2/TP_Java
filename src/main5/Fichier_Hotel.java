@@ -37,7 +37,7 @@ public class Fichier_Hotel {
 	    return chambres;
 	}
 
-	// Méthode utilitaire : écrire un vecteur de chambres dans le fichier
+	
 	public void sauvegarderChambres(Vector<Chambre> v) {
 	    try (DataOutputStream dos = new DataOutputStream(new FileOutputStream(fichier))) {
 	        for (Chambre c : v) {
@@ -53,7 +53,7 @@ public class Fichier_Hotel {
 	    }
 	}
 
-	// 4.a - Ajout d'une chambre au fichier (append)
+	
 	public void ajouterChambre(Chambre c) {
 	    try (DataOutputStream dos = new DataOutputStream(new FileOutputStream(fichier, true))) {
 	        dos.writeInt(c.getNumero());
@@ -67,7 +67,7 @@ public class Fichier_Hotel {
 	    }
 	}
 
-	// 4.a - Suppression d'une chambre par numéro
+	
 	public void supprimerChambre(int numero) {
 	    Vector<Chambre> chambres = lireToutesChambres();
 	    boolean trouvee = false;
@@ -108,7 +108,7 @@ public class Fichier_Hotel {
 	    }
 	}
 
-	// 4.a - Consultation d'une chambre par numéro
+	
 	public Chambre consulterChambre(int numero) {
 	    try (DataInputStream dis = new DataInputStream(new FileInputStream(fichier))) {
 	        while (true) {
@@ -134,7 +134,7 @@ public class Fichier_Hotel {
 	    try (DataInputStream dis = new DataInputStream(new FileInputStream(fichier));
 	         DataOutputStream dos = new DataOutputStream(new FileOutputStream("categorie_" + catCible + ".dat"))) {
 	        
-	        while (true) { // La boucle s'arrête via l'EOFException
+	        while (true) { 
 	            int num = dis.readInt();
 	            int cat = dis.readInt();
 	            double prix = dis.readDouble();
@@ -182,10 +182,10 @@ public class Fichier_Hotel {
 
 	    try (DataInputStream dis = new DataInputStream(new FileInputStream(fichier))) {
 	        while (true) {
-	            dis.readInt(); // On saute le numéro
-	            dis.readInt(); // On saute la catégorie
+	            dis.readInt(); 
+	            dis.readInt(); 
 	            double prix = dis.readDouble();
-	            dis.readInt(); // On saute la capacité
+	            dis.readInt(); 
 	            char etat = dis.readChar();
 
 	            maxPossible += prix;
