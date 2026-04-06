@@ -247,7 +247,8 @@ public class AgenceGUI extends JFrame {
             }
 
             Voiture v = agence.voitures.get(indexVoiture);
-            Client nouveauClient = new Client(); 
+         // On injecte les variables récupérées dans l'interface directement dans le constructeur
+         Client nouveauClient = new Client(nom, prenom, cin, "M/Mme"); 
             
             agence.loueVoiture(nouveauClient, v);
             
