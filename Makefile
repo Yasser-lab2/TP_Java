@@ -9,7 +9,11 @@ SOURCES = $(SRC)/main/Morse.java \
           $(SRC)/main2/Somme.java \
           $(SRC)/main3/Livre.java $(SRC)/main3/Bibliothèque.java $(SRC)/main3/Test.java \
           $(SRC)/main4/Exercice1.java \
-          $(SRC)/main5/Chambre.java $(SRC)/main5/Fichier_Hotel.java $(SRC)/main5/Hotel.java
+		  $(SRC)/main5/Chambre.java $(SRC)/main5/Fichier_Hotel.java $(SRC)/main5/Hotel.java \
+		  $(SRC)/main7/Agence.java $(SRC)/main7/AgenceGUI.java $(SRC)/main7/Client.java \
+		  $(SRC)/main7/Critere.java $(SRC)/main7/CritereAnnee.java $(SRC)/main7/CritereMarque.java \
+		  $(SRC)/main7/CriterePrix.java $(SRC)/main7/InterCritere.java $(SRC)/main7/Test.java \
+		  $(SRC)/main7/Voiture.java
 
 # Compile all sources
 all: compile
@@ -38,9 +42,13 @@ run-exercice1: compile
 run-hotel: compile
 	$(JAVA) -cp $(BIN) main5.Hotel
 
+# Usage: make run-main7
+run-main7: compile
+	$(JAVA) -cp $(BIN) main7.AgenceGUI
+
 # Clean compiled files
 clean:
 	if exist $(BIN) rmdir /S /Q $(BIN)
 	mkdir $(BIN)
 
-.PHONY: all compile clean run-morse run-somme run-test run-exercice1 run-hotel
+.PHONY: all compile clean run-morse run-somme run-test run-exercice1 run-hotel run-main7
