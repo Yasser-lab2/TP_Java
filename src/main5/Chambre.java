@@ -1,25 +1,33 @@
 package main5;
 
 public class Chambre {
+	private static int compteur = 1;
+
 	private int capacite;
 	private char etat;
 	private double prix;
 	private int categorie;
 	private int numero;
 
-	public Chambre(int numero,
-			double prix,
-			int categorie,
-			char etat,
-			int capacite
-			) {
-		// TODO Auto-generated constructor stub
-		this.categorie=categorie;
-		this.prix=prix;
-		this.etat=etat;
-		this.capacite=capacite;
-		this.numero=numero;
-		
+
+	public Chambre(double prix, int categorie, char etat, int capacite) {
+		this.numero = compteur++;
+		this.prix = prix;
+		this.categorie = categorie;
+		this.etat = etat;
+		this.capacite = capacite;
+	}
+
+	
+	public Chambre(int numero, double prix, int categorie, char etat, int capacite) {
+		this.numero = numero;
+		this.prix = prix;
+		this.categorie = categorie;
+		this.etat = etat;
+		this.capacite = capacite;
+		if (numero >= compteur) {
+			compteur = numero + 1;
+		}
 	}
     
 	public String toString() {

@@ -5,18 +5,20 @@ import java.util.*;
 
 public class Test {
     private static Scanner scanner = new Scanner(System.in);
-    private static final String FILE_NAME = "bibliotheque.ser";
+    private static final String FILE_NAME = "bibliotheque.dat";
 
     public static void main(String[] args) {
         Bibliothèque maBiblio = chargerDonnees();
         int choix;
+        boolean ok=true;
 
         do {
             System.out.println("\n--- MENU GESTION BIBLIOTHÈQUE ---");
             System.out.println("1. Afficher les livres");
             System.out.println("2. Ajouter un livre");
             System.out.println("3. Rechercher par auteur");
-            System.out.println("4. Sauvegarder et Quitter");
+            System.out.println("4. Sauvegarder ");
+            System.out.println("5. Quitter");
             System.out.print("Votre choix : ");
             choix = scanner.nextInt();
             scanner.nextLine(); 
@@ -26,9 +28,10 @@ public class Test {
                 case 2 -> ajouterUnLivre(maBiblio);
                 case 3 -> rechercherLivre(maBiblio);
                 case 4 -> sauvegarderDonnees(maBiblio);
+                case 5 -> ok=false;
                 default -> System.out.println("Choix invalide.");
             }
-        } while (choix != 4);
+        } while (ok);
     }
 
     private static void ajouterUnLivre(Bibliothèque b) {
@@ -65,7 +68,7 @@ public class Test {
         }
     }
 
-    //  SÉRIALISATION 
+    
 
     private static void sauvegarderDonnees(Bibliothèque b) {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(FILE_NAME))) {

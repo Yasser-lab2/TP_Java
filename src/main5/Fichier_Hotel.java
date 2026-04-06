@@ -30,7 +30,7 @@ public class Fichier_Hotel {
 	            chambres.add(new Chambre(num, prix, cat, etat, cap));
 	        }
 	    } catch (EOFException e) {
-	        // Fin du fichier
+	        
 	    } catch (IOException e) {
 	        e.printStackTrace();
 	    }
@@ -39,7 +39,7 @@ public class Fichier_Hotel {
 
 	
 	public void sauvegarderChambres(Vector<Chambre> v) {
-	    try (DataOutputStream dos = new DataOutputStream(new FileOutputStream(fichier))) {
+	    try (DataOutputStream dos = new DataOutputStream(new FileOutputStream(fichier, true))) {
 	        for (Chambre c : v) {
 	            dos.writeInt(c.getNumero());
 	            dos.writeInt(c.getCategorie());
