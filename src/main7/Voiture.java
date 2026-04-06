@@ -57,7 +57,7 @@ public class Voiture {
                Objects.equals(model, voiture.model);
     }
 	
-	public String tostring() {
+	public String toString() {
 		return "la marque : "+ marque + ", Le model : "+ model + ", L'année de production : "+ annee +", Le prix : "+prix;
 	}
 

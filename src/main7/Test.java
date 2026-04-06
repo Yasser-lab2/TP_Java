@@ -2,10 +2,6 @@ package main7;
 
 public class Test {
 
-	public Test() {
-		// TODO Auto-generated constructor stub
-	}
-
 	public static void main(String[] args) {
         Agence agence = new Agence();
         
@@ -20,16 +16,45 @@ public class Test {
         agence.ajouterVoiture(v4);
 
         System.out.println("--- Q5 : Voitures à moins de 100 ---");
-        // Q5: Ligne de code permettant d'afficher toutes les voitures dont le prix est inférieur à 100
         agence.afficheSelection(new CriterePrix(100));
 
         System.out.println("\n--- Q7 : InterCritere (Renault, 2009, prix < 100) ---");
-        // Q7: Lignes de code pour créer un critère intersection
         InterCritere interC = new InterCritere();
         interC.addCritere(new CritereMarque("Renault"));
-        interC.addCritere(new CritereAnnee(2009)); // Nécessite la classe CritereAnnee
+        interC.addCritere(new CritereAnnee(2009));
         interC.addCritere(new CriterePrix(100));
         agence.afficheSelection(interC);
 
-}
+        
+        System.out.println("\n--- Q9 & Q10 : Tests des Locations ---");
+        
+        // On crée des clients dans le désordre alphabétique
+        Client c1 = new Client("Zidane", "Zinedine", 11111, "M.");
+        Client c2 = new Client("Mbappe", "Kylian", 22222, "M.");
+        Client c3 = new Client("Abidal", "Eric", 33333, "M.");
+
+        try {
+            // Test d'ajout de location (Q9)
+            System.out.println("> Location de voitures pour Abidal, Mbappe et Zidane...");
+            agence.loueVoiture(c1, v1);
+            agence.loueVoiture(c2, v2);
+            agence.loueVoiture(c3, v3);
+            
+            // Test Q10 : L'affichage doit se faire dans l'ordre: Abidal, Mbappe, Zidane (grâce au TreeMap)
+            agence.afficherLocations();
+            
+            // Test exception (Voiture déjà louée)
+            System.out.println("\n> Tentative de location de la Clio (déjà louée par Zidane) par un autre client :");
+            Client c4 = new Client("Griezmann", "Antoine", 44444, "M.");
+            agence.loueVoiture(c4, v1); // Va déclencher l'exception
+            
+        } catch (Exception e) {
+            System.out.println("Erreur interceptée : " + e.getMessage());
+        }
+
+        // Test de la restitution d'une voiture
+        System.out.println("\n> Mbappe rend sa voiture...");
+        agence.rendVoiture(c2);
+        agence.afficherLocations();
+	}
 }
