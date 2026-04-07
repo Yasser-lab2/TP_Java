@@ -37,6 +37,7 @@ public class Ex1_1_Telephone extends Frame {
         setSize(300, 250);
         setVisible(true);
 
+       
         // Fermeture de la fenêtre
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent e) {

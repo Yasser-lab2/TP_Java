@@ -1,13 +1,11 @@
 package main7;
 
-import javax.swing.*;
-import javax.swing.border.*;
-import javax.swing.plaf.basic.*;
-import javax.swing.table.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.*;
 import java.util.Map;
+import javax.swing.*;
+import javax.swing.plaf.basic.*;
+import javax.swing.table.*;
 
 public class AgenceGUI1 extends JFrame {
 
@@ -43,6 +41,9 @@ public class AgenceGUI1 extends JFrame {
     private JTextField txtNouvelleMarque, txtNouveauModele, txtNouvelleAnnee, txtNouveauPrix;
 
     private JLabel statusLabel;
+    private JLabel statParcValue;
+    private JLabel statLoueesValue;
+    private JLabel statDispoValue;
 
     public AgenceGUI1() {
         super("AGENCE PRESTIGE  -  Systeme de Location");
@@ -125,26 +126,36 @@ public class AgenceGUI1 extends JFrame {
         // Right: stat chips
         JPanel stats = new JPanel(new FlowLayout(FlowLayout.RIGHT, 20, 0));
         stats.setOpaque(false);
-        stats.add(statChip("PARC",   agence.voitures.size() + " vehicules"));
-        stats.add(statChip("LOUEES", agence.locations.size() + " en cours"));
-        stats.add(statChip("DISPO",  (agence.voitures.size() - agence.locations.size()) + " libres"));
+        statParcValue = new JLabel();
+        statLoueesValue = new JLabel();
+        statDispoValue = new JLabel();
+        stats.add(statChip("PARC", statParcValue));
+        stats.add(statChip("LOUEES", statLoueesValue));
+        stats.add(statChip("DISPO", statDispoValue));
 
         header.add(left,  BorderLayout.WEST);
         header.add(stats, BorderLayout.EAST);
         return header;
     }
 
-    private JLabel statChip(String label, String value) {
-        JLabel chip = new JLabel(
-            "<html><center><span style='color:#888;font-size:9px'>" + label +
-            "</span><br><b style='color:#D4AF37;font-size:15px'>" + value + "</b></center></html>");
-        chip.setHorizontalAlignment(SwingConstants.CENTER);
-        chip.setFont(FONT_SMALL);
+    private JPanel statChip(String label, JLabel valueLabel) {
+        JPanel chip = new JPanel(new GridLayout(2, 1, 0, 2));
         chip.setBorder(BorderFactory.createCompoundBorder(
             BorderFactory.createLineBorder(BORDER_SUBTLE),
             BorderFactory.createEmptyBorder(6, 14, 6, 14)));
         chip.setBackground(BG_PANEL);
         chip.setOpaque(true);
+
+        JLabel titleLabel = new JLabel(label, SwingConstants.CENTER);
+        titleLabel.setFont(FONT_SMALL);
+        titleLabel.setForeground(TEXT_MUTED);
+
+        valueLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        valueLabel.setFont(FONT_CARD);
+        valueLabel.setForeground(ACCENT_GOLD);
+
+        chip.add(titleLabel);
+        chip.add(valueLabel);
         return chip;
     }
 
@@ -511,7 +522,20 @@ public class AgenceGUI1 extends JFrame {
                 louee ? "Louee" : "Disponible"
             });
         }
+        updateStatsChips();
         setStatus("Affichage : " + tableModel.getRowCount() + " vehicule(s).");
+    }
+
+    private void updateStatsChips() {
+        if (statParcValue == null || statLoueesValue == null || statDispoValue == null) {
+            return;
+        }
+        int parc = agence.voitures.size();
+        int louees = agence.locations.size();
+        int dispo = parc - louees;
+        statParcValue.setText(parc + " vehicules");
+        statLoueesValue.setText(louees + " en cours");
+        statDispoValue.setText(dispo + " libres");
     }
 
     private void afficherVoituresLouees() {

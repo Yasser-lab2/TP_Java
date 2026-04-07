@@ -75,7 +75,17 @@ public class AgenceGUI extends JFrame {
         scrollZone.getViewport().setOpaque(false);
         mainPanel.add(scrollZone, BorderLayout.CENTER);
 
-        JTabbedPane onglets = new JTabbedPane();
+        JTabbedPane onglets = new JTabbedPane() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                Graphics2D g2 = (Graphics2D) g.create();
+                g2.setColor(panneauTransparent);
+                g2.fillRect(0, 0, getWidth(), getHeight());
+                g2.dispose();
+                super.paintComponent(g);
+            }
+        };
+        onglets.setOpaque(false);
         onglets.setFont(new Font("Arial", Font.BOLD, 12));
         onglets.addTab("Location", creerPanelLocation(panneauTransparent));
         onglets.addTab("Ajouter une voiture", creerPanelAjoutVoiture(panneauTransparent));
@@ -214,8 +224,17 @@ public class AgenceGUI extends JFrame {
     }
 
     private JPanel creerPanelLocation(Color fond) {
-        JPanel panelSud = new JPanel(new GridLayout(2, 1, 10, 10));
-        panelSud.setBackground(fond);
+        JPanel panelSud = new JPanel(new GridLayout(2, 1, 10, 10)) {
+            @Override
+            protected void paintComponent(Graphics g) {
+                Graphics2D g2 = (Graphics2D) g.create();
+                g2.setColor(fond);
+                g2.fillRect(0, 0, getWidth(), getHeight());
+                g2.dispose();
+                super.paintComponent(g);
+            }
+        };
+        panelSud.setOpaque(false);
         panelSud.setBorder(BorderFactory.createTitledBorder(
                 BorderFactory.createLineBorder(Color.DARK_GRAY),
                 "Gestion des locations",
@@ -277,8 +296,17 @@ public class AgenceGUI extends JFrame {
     }
 
     private JPanel creerPanelAjoutVoiture(Color fond) {
-        JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        panel.setBackground(fond);
+        JPanel panel = new JPanel(new FlowLayout(FlowLayout.LEFT)) {
+            @Override
+            protected void paintComponent(Graphics g) {
+                Graphics2D g2 = (Graphics2D) g.create();
+                g2.setColor(fond);
+                g2.fillRect(0, 0, getWidth(), getHeight());
+                g2.dispose();
+                super.paintComponent(g);
+            }
+        };
+        panel.setOpaque(false);
         panel.setBorder(BorderFactory.createTitledBorder(
                 BorderFactory.createLineBorder(Color.DARK_GRAY),
                 "Ajouter une voiture",
